@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+    <head>
+	{% if not feed_title %}
+	<title>RSS Feed</title>
+	{% else %}
+	<title>RSS Feed - {{ feed_title }} </title>
+	{% endif %}
+
+	<link rel="stylesheet" href="https://necolas.github.io/normalize.css/latest/normalize.css"/>
+	<link rel="stylesheet" href="/style.css"/>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    </head>
+    <body>
+	{% if error %}
+	<div id="error-message">
+	    {{ error }}
+	</div>
+	{% endif %}
+
+	<div id="content">
+	    <div id="menu">
+
+		<div id="feedmenu">
+
+		    <div class="card">
+			<div class="title">Feeds</div>
+		    </div>
+
+		    <div class="card" id="addfeed">
+			<form method="POST" action="/add_feed">
+			    <div>Add new feed</div>
+			    <div>
+				<div><input name="feed_title" type=text/></div>
+				<div><input type="submit" value="Add feed"/></div>
+			    </div>
+			</form>
+		    </div>
+
+		    {% if feed_names.__len__() > 1 %}
+		    <div class="card" id="feed-select">
+			{% for name in feed_names %}
+			{% if name != feed_title %}
+			<div class="feed-name">
+			    <a href="/feed/{{name}}">{{name}}</a>
+			</div>
+			{% endif %}
+			{% endfor %}
+		    </div>
+		    {% endif %}
+		</div>
+
+		<div id="channelmenu">
+		    {% block channelmenu %}
+		    {% endblock %}
+		</div>
+
+	    </div>
+
+	    {% if feed_title %}
+	    <div id="feed">
+		<div>
+		    <div class="card">
+
+			<div id="feed-title" class="title"> 
+			    {{ feed_title }}
+			</div>
+		    </div>
+
+		    {% block feed %}
+		    {% endblock %}
+		</div>
+	    </div>
+	    {% endif %}
+	</div>
+
+	<div id="footer">
+	    RSS Feed by Yaroslav Rogov and Alexander Sorokin
+	</div>
+    </body>
+</html>

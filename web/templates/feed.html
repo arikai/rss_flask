@@ -1,0 +1,45 @@
+{% extends "main.html" %}
+
+{% block channelmenu %}
+
+<div class="card">
+    <div class="title">Channels</div>
+</div>
+
+<div class="card" id="addchannel">
+    <form method="POST" action="add_channel">
+	<div>Add channel</div>
+	<div>
+	    <div><input name="channel_url" type=url/></div>
+	    <div><input type="submit" value="Add channel"/></div>
+	</div>
+    </form>
+</div>
+
+{% if feed_channels %}
+<div class="card" id="channels">
+    {% for name, link in feed_channels %}
+    <div class="channel"><a href="{{link}}">{{ name }}</a></div>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% endblock %}
+
+
+{% block feed %}
+{% for item in  feed_items %}
+<div class="card feed-item">
+    <div class="channel-title">
+	{{ item.channel_title }} 
+    </div>
+    <div class="title"/>
+	<a href="{{ item.link }}">{{ item.title }}</a>
+    </div>
+    <div class="description">
+	{{ item.description|safe }}
+    </div>
+</div>
+{% endfor %}
+
+{% endblock %}

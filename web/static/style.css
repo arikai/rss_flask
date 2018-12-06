@@ -1,0 +1,119 @@
+body { 
+    background-color: #EEEEEE;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+div#content {
+    display: flex;
+    justify-content: center; 
+}
+
+.card {
+    display: block;
+    padding: 1em;
+    margin: 1em;
+    background-color: #FFFFFF;
+    box-shadow: 0.25em 0.5em 1em #707070;
+}
+
+.card .title {
+    font-size: 150%;
+}
+
+/*
+ * Menu
+ */
+
+#menu {
+    flex: 20%;
+    max-width: 20%;
+}
+
+#menu input {
+    margin: 1em 0.5em;
+    width: 80%;
+}
+
+#menu input[type=submit] {
+    width: auto;
+}
+
+
+#menu .card {
+    display: block;
+    text-align: center;
+}
+
+#menu .channel {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+#menu #feed-select .feed-name {
+    font-size: 120%;
+    margin-top: 0.75em;
+    margin-bottom: 0.75em;
+}
+
+/* 
+ * Feed
+ */
+
+#feed {
+    flex: 80%;
+}
+
+#feed>div {
+    display: block;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+
+#feed #feed-title {
+    text-align: center;
+}
+
+#feed .card {
+    text-align: left;
+    padding: 2em 4em;
+}
+
+#feed .card .channel-title {
+    font-size: 80%;
+    margin-bottom: 1%
+}
+
+#feed .card .title {
+    font-weight: bold;
+    margin: 1% 0%;
+}
+
+/*
+ * Feed content
+ */
+
+#feed .description pre {
+    white-space: pre-wrap;
+    padding: 2em;
+    background-color: #F5F5F5;
+}
+
+#feed .description img {
+    display: block;
+    max-width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/*
+ * Footer
+ */
+
+div#footer{
+    text-align: center;
+    margin-top: 5em;
+    margin-bottom: 10em;
+}
