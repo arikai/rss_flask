@@ -1,14 +1,13 @@
-REPORTDIR = ./report
-LABNAME = 6_progtech
-TEXFILE = $(LABNAME)_report.tex
-PDFFILE = $(LABNAME)_report.pdf
+PY = python3
+APP = src/web.py
 
+all:
+	$(PY) $(APP)
 
+debug:
+	FLASK_DEBUG=1 FLASK_APP=$(WEBAPP_DEV) flask run
 
-report: $(PDFFILE)
-	zathura $(REPORTDIR)/$(PDFFILE) &
-
-$(PDFFILE): $(REPORTDIR)/$(TEXFILE) 
-	cd $(REPORTDIR) && xelatex -shell-escape $(TEXFILE) && cd -
+dev:
+	FLASK_APP=$(WEBAPP_DEV) FLASK_ENV=development flask run
 
 .PHONY: report
