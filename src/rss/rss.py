@@ -146,9 +146,9 @@ class RSSChannel(db.Model):
         return channel
 
     def update(self):
-        feed = rss_parse.download_feed(url)
+        feed = rss_parse.download_feed(self.url)
         for item in feed['items']:
-            if not RSSPost.query.get(guid):
+            if not RSSPost.query.get((item['guid'], self.url)):
                 post = RSSPost(**item)
                 channel.posts.append(post)
 
