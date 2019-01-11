@@ -1,0 +1,27 @@
+* What is it?
+Web-based RSS reader that was made during Python courses in ITMO University.
+
+
+* Dependencies
+- Python 3+
+- SQLite
+- SQLAlchemy
+- Flask
+  - Flask-SQLAlchemy
+- Browser that supports CSS3 (for ~flexbox~)
+
+
+* How to launch
+
+** Launch web-server
+#BEGIN_SRC shell
+# make
+#END_SRC
+
+** Open web-client in any modern browser
+The URL for client is ~localhost:5000~
+
+
+* Bugs:
+- After reload of web-server, feeds lose all their assosiations with channels.  
+  Probably DB bug.

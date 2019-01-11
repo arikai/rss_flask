@@ -25,6 +25,7 @@
 
 		<div id="feedmenu">
 
+		    <a class="card" href="/update">Update feeds</a>
 		    <div class="card">
 			<div class="title">Feeds</div>
 		    </div>
@@ -39,16 +40,18 @@
 			</form>
 		    </div>
 
-		    {% if feed_names.__len__() > 1 %}
-		    <div class="card" id="feed-select">
-			{% for name in feed_names %}
-			{% if name != feed_title %}
+		    {% if feeds.__len__() > 0 %}
+		    {% if not(feeds.__len__() == 1 and feed) %}
+		    <nav class="card" id="feed-select">
+			{% for name in feeds %}
+			{% if name != feed.title %}
 			<div class="feed-name">
 			    <a href="/feed/{{name}}">{{name}}</a>
 			</div>
 			{% endif %}
 			{% endfor %}
-		    </div>
+		    </nav>
+		    {% endif %}
 		    {% endif %}
 		</div>
 
@@ -59,13 +62,13 @@
 
 	    </div>
 
-	    {% if feed_title %}
+	    {% if feed %}
 	    <div id="feed">
 		<div>
 		    <div class="card">
 
 			<div id="feed-title" class="title"> 
-			    {{ feed_title }}
+			    {{ feed.title }}
 			</div>
 		    </div>
 

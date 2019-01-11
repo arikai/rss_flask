@@ -1,0 +1,164 @@
+% Created 2018-12-18 Tue 14:38
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\tolerance=1000
+\newcommand\subject{Технологии Программирования}
+\newcommand\teacher{Оголюк А.А.}
+\renewcommand\maketitle{
+\begin{titlepage}
+\begin{center}
+Университет ИТМО, кафедра ВТ \\
+\vspace{\stretch{3}}
+\large
+Лабораторная работа №6    \\
+по дисциплине               \\
+«\subject»                  \\
+\end{center}
+\vspace{\stretch{5}}
+\begin{flushright}{
+\large
+Работа выполнена                  \\
+студентами группы P3400           \\
+\textbf{\theauthor}               \\
+\vspace{\stretch{1}}
+Преподаватель:          \\
+\textbf{\teacher}
+}\end{flushright}
+\vspace{\stretch{7}}
+\begin{center}{
+Санкт-Петербург, \the\year
+}
+\end{center}
+\end{titlepage}
+}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=0.5in,left=1in]{geometry}
+\usepackage{nopageno}
+\def\author#1{\gdef\@author{#1}\gdef\theauthor{#1}}
+\def\title#1{\gdef\@title{#1}\gdef\thetitle{#1}}
+\usepackage{fontspec}
+\setmainfont{NotoSerif}
+\setsansfont{Open Sans}
+\setmonofont{DejaVu Sans Mono}
+\newfontfamily{\cyrillicfontrm}{NotoSerif}
+\newfontfamily{\cyrillicfontsf}{Open Sans}
+\newfontfamily{\cyrillicfonttt}{DejaVu Sans Mono}
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+\PolyglossiaSetup{russian}{indentfirst=true}
+\enablehyphenation
+% Graphics
+\usepackage{graphicx}	% \includegraphics and other
+\usepackage{color}	    % Colors
+\usepackage{xcolor}	    % Extended colors
+\usepackage[cachedir=\detokenize{~/.cache/minted/}\jobname]{minted}	    % Code Listings (supports UTF-8)
+\usepackage{tabularx}	% Enhanced tabular
+\usepackage{hyperref}	% Hyperlinks inside document
+\usepackage{array}	    % \tabular for text and \array for math
+\usepackage{float}	    % Improve floating objects
+\usepackage{verbatim}	% \begin{verbatim}
+%    write \anything you $$(_ want
+% \end{verbatim}
+% Math
+\usepackage{amsmath}	    % Basic Math Facilities
+\usepackage{mathtools}	    % Enhance amsmath
+\usepackage{amsfonts}	    % Extended set of fonts for math
+\setminted{
+autogobble=true, % trim leading spaces
+breakanywhere=true,
+breakautoindent=true,
+breaklines=true,
+breaksymbol=> ,
+breaksymbolindent=2em,
+breaksymbolright= \textbackslash{},
+breaksymbolindentright=2em,
+encoding=utf-8,
+fontfamily=tt,
+fontsize=\footnotesize,
+framesep=5em,
+numbersep=2em,
+python3=true
+}
+\newcommand{\src}[2]{
+\inputminted[
+frame=lines,
+framesep=1em,
+framerule=0.25mm,
+label=#2,
+labelposition=topline
+]{#1}{#2}
+}
+\renewcommand{\refname}{Список литературы}
+\pagestyle{empty}
+\graphicspath{ {../figure/} }
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\arraybackslash\hspace{0pt}}m{#1}}
+\author{Рогов Я.С. \\ Сорокин А.А.}
+\date{\today}
+\title{\{ \}}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={},
+  pdfcreator={Emacs 24.5.1 (Org mode 8.2.10)}}
+\begin{document}
+
+\maketitle
+
+\section{Задание}
+\label{sec-1}
+
+
+Реализовать простой RSS reader.
+При добавлении ленты (например \url{https://habrahabr.ru/rss/interesting/})
+записи из добавленной ленты сканируются и заносятся в базу (например sqlite).
+При нажатии на кнопку обновить - новое сканирование и добавление новых записей (без дублрования существующих).
+Отображение ленты начиная с самых свежих записей с пагинацией (несколько записей на странице).
+Записи из разных лент хранить и показывать отдельно (по названию ленты).
+Сделать серверную часть, т.е. клиент работает в обычном браузере обращаясь к веб-серверу.
+
+\section{Реализация}
+\label{sec-2}
+
+В реализации используются:
+\begin{itemize}
+\item Фреймворк Flask
+\item Движок шаблонов Jinja2
+\item ORM SQLAlchemy
+\item База данных SQLite
+\end{itemize}
+
+\subsection{Исходный код сервера}
+\label{sec-2-1}
+
+\src{python}{../src/web.py}
+\src{python}{../src/rss/rss.py}
+\src{python}{../src/rss/parse.py}
+
+\subsection{Шаблоны и стили}
+\label{sec-2-2}
+\src{html+jinja}{../web/templates/main.html}
+\src{html+jinja}{../web/templates/feed.html}
+
+\section{Выводы}
+\label{sec-3}
+В ходе выполнения данной лабораторной работы было изучено создание
+веб-приложений с применением фреймворка Flask, а также работа с базами
+данных в Python с помощью SQLAlchemy и SQLite.
+% Emacs 24.5.1 (Org mode 8.2.10)
+\end{document}

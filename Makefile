@@ -1,13 +1,16 @@
 PY = python3
 APP = src/web.py
 
-all:
+all: data
 	$(PY) $(APP)
 
-debug:
+debug: data
 	FLASK_DEBUG=1 FLASK_APP=$(WEBAPP_DEV) flask run
 
-dev:
+dev: data
 	FLASK_APP=$(WEBAPP_DEV) FLASK_ENV=development flask run
+
+data:
+	mkdir -p data
 
 .PHONY: report

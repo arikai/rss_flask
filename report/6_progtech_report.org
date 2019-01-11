@@ -1,0 +1,177 @@
+#+AUTHOR: Рогов Я.С. \\ Сорокин А.А.
+#+TITLE: { }
+#+LATEX_HEADER: \newcommand\subject{Технологии Программирования}
+#+LATEX_HEADER: \newcommand\teacher{Оголюк А.А.}
+
+#+STARTUP: showall hideblocks inlineimages indent
+
+#+OPTIONS: ':t -:t ::t <:t \n:nil ^:t f:t |:t e:t
+#+OPTIONS: author:t broken-links:mark date:t title:t
+#+OPTIONS: tex:t toc:nil
+#+OPTIONS: H:2
+
+* Title Page :noexport:
+:PROPERTIES:
+:VISIBILITY: folded
+:END:
+#+LATEX_HEADER: \renewcommand\maketitle{
+#+LATEX_HEADER:     \begin{titlepage}
+#+LATEX_HEADER:     \begin{center}
+#+LATEX_HEADER:         Университет ИТМО, кафедра ВТ \\
+#+LATEX_HEADER:
+#+LATEX_HEADER:         \vspace{\stretch{3}}
+#+LATEX_HEADER:         \large
+#+LATEX_HEADER:         Лабораторная работа №6    \\
+#+LATEX_HEADER:         по дисциплине               \\
+#+LATEX_HEADER:         «\subject»                  \\
+#+LATEX_HEADER:     \end{center}
+#+LATEX_HEADER:
+#+LATEX_HEADER:     \vspace{\stretch{5}}
+#+LATEX_HEADER:     \begin{flushright}{
+#+LATEX_HEADER:             \large
+#+LATEX_HEADER:             Работа выполнена                  \\
+#+LATEX_HEADER:             студентами группы P3400           \\
+#+LATEX_HEADER:             \textbf{\theauthor}               \\
+#+LATEX_HEADER:
+#+LATEX_HEADER:             \vspace{\stretch{1}}
+#+LATEX_HEADER:             Преподаватель:          \\
+#+LATEX_HEADER:             \textbf{\teacher}
+#+LATEX_HEADER:     }\end{flushright}
+#+LATEX_HEADER:
+#+LATEX_HEADER:     \vspace{\stretch{7}}
+#+LATEX_HEADER:     \begin{center}{
+#+LATEX_HEADER:             Санкт-Петербург, \the\year
+#+LATEX_HEADER:         }
+#+LATEX_HEADER:     \end{center}
+#+LATEX_HEADER:     \end{titlepage}
+#+LATEX_HEADER: }
+
+
+* LaTeX Header :noexport:
+:PROPERTIES:
+:VISIBILITY: folded
+:END:
+
+#+LATEX_COMPILER: xelatex
+
+#+LATEX_CLASS: article
+#+LATEX_CLASS_OPTIONS: [a4paper, 12pt]
+#+LATEX_HEADER: \usepackage[utf8]{inputenc}
+# #+LATEX_HEADER: \usepackage[hmargin=0.5in, left=1in, right=0.5in]{geometry}
+#+LATEX_HEADER: \usepackage[margin=0.5in,left=1in]{geometry}
+#+LATEX_HEADER: \usepackage{nopageno}
+
+#+LATEX_HEADER: \def\author#1{\gdef\@author{#1}\gdef\theauthor{#1}}
+#+LATEX_HEADER: \def\title#1{\gdef\@title{#1}\gdef\thetitle{#1}}
+** Fonts and Languages
+#+LATEX_HEADER:\usepackage{fontspec}
+#+LATEX_HEADER:\setmainfont{NotoSerif}
+#+LATEX_HEADER:\setsansfont{Open Sans}
+#+LATEX_HEADER:\setmonofont{DejaVu Sans Mono}
+#+LATEX_HEADER:\newfontfamily{\cyrillicfontrm}{NotoSerif}
+#+LATEX_HEADER:\newfontfamily{\cyrillicfontsf}{Open Sans}
+#+LATEX_HEADER:\newfontfamily{\cyrillicfonttt}{DejaVu Sans Mono}
+#+LATEX_HEADER:
+#+LATEX_HEADER:\usepackage{polyglossia}
+#+LATEX_HEADER:\setdefaultlanguage{russian}
+#+LATEX_HEADER:\setotherlanguage{english}
+#+LATEX_HEADER:\PolyglossiaSetup{russian}{indentfirst=true}
+#+LATEX_HEADER:\enablehyphenation
+
+** Packages
+#+LATEX_HEADER:
+#+LATEX_HEADER: % Graphics
+#+LATEX_HEADER: \usepackage{graphicx}	% \includegraphics and other
+#+LATEX_HEADER: \usepackage{color}	    % Colors
+#+LATEX_HEADER: \usepackage{xcolor}	    % Extended colors
+#+LATEX_HEADER:
+#+LATEX_HEADER: \usepackage[cachedir=\detokenize{~/.cache/minted/}\jobname]{minted}	    % Code Listings (supports UTF-8)
+#+LATEX_HEADER: \usepackage{tabularx}	% Enhanced tabular
+#+LATEX_HEADER: \usepackage{hyperref}	% Hyperlinks inside document
+#+LATEX_HEADER: \usepackage{array}	    % \tabular for text and \array for math
+#+LATEX_HEADER: \usepackage{float}	    % Improve floating objects
+#+LATEX_HEADER: \usepackage{verbatim}	% \begin{verbatim}
+#+LATEX_HEADER:                         %    write \anything you $$(_ want
+#+LATEX_HEADER:                         % \end{verbatim}
+#+LATEX_HEADER:
+#+LATEX_HEADER: % Math
+#+LATEX_HEADER: \usepackage{amsmath}	    % Basic Math Facilities
+#+LATEX_HEADER: \usepackage{mathtools}	    % Enhance amsmath
+#+LATEX_HEADER: \usepackage{amsfonts}	    % Extended set of fonts for math
+** Minted
+#+LATEX_HEADER:\setminted{
+#+LATEX_HEADER:    autogobble=true, % trim leading spaces
+#+LATEX_HEADER:    breakanywhere=true,
+#+LATEX_HEADER:    breakautoindent=true,
+#+LATEX_HEADER:    breaklines=true,
+#+LATEX_HEADER:    breaksymbol=> ,
+#+LATEX_HEADER:    breaksymbolindent=2em,
+#+LATEX_HEADER:    breaksymbolright= \textbackslash{},
+#+LATEX_HEADER:    breaksymbolindentright=2em,
+#+LATEX_HEADER:    encoding=utf-8,
+#+LATEX_HEADER:    fontfamily=tt,
+#+LATEX_HEADER:    fontsize=\footnotesize,
+#+LATEX_HEADER:    framesep=5em,
+#+LATEX_HEADER:    numbersep=2em,
+#+LATEX_HEADER:    python3=true
+#+LATEX_HEADER:}
+
+
+* LaTeX Commands :noexport:
+:PROPERTIES:
+:VISIBILITY: folded
+:END:
+
+#+LATEX_HEADER: \newcommand{\src}[2]{
+#+LATEX_HEADER:    \inputminted[
+#+LATEX_HEADER:     frame=lines,
+#+LATEX_HEADER:     framesep=1em,
+#+LATEX_HEADER:     framerule=0.25mm,
+#+LATEX_HEADER:     label=#2,
+#+LATEX_HEADER:     labelposition=topline
+#+LATEX_HEADER: ]{#1}{#2}
+#+LATEX_HEADER: }
+#+LATEX_HEADER:
+#+LATEX_HEADER: \renewcommand{\refname}{Список литературы}
+#+LATEX_HEADER: \pagestyle{empty}
+#+LATEX_HEADER: \graphicspath{ {../figure/} }
+#+LATEX_HEADER:
+#+LATEX_HEADER: \newcolumntype{L}[1]{>{\raggedright\let\newline\\arraybackslash\hspace{0pt}}m{#1}}
+#+LATEX_HEADER: \newcolumntype{C}[1]{>{\centering\let\newline\\arraybackslash\hspace{0pt}}m{#1}}
+#+LATEX_HEADER: \newcolumntype{R}[1]{>{\raggedleft\let\newline\\arraybackslash\hspace{0pt}}m{#1}}
+
+
+
+* Задание
+
+
+Реализовать простой RSS reader.
+При добавлении ленты (например https://habrahabr.ru/rss/interesting/)
+записи из добавленной ленты сканируются и заносятся в базу (например sqlite).
+При нажатии на кнопку обновить - новое сканирование и добавление новых записей (без дублрования существующих).
+Отображение ленты начиная с самых свежих записей с пагинацией (несколько записей на странице).
+Записи из разных лент хранить и показывать отдельно (по названию ленты).
+Сделать серверную часть, т.е. клиент работает в обычном браузере обращаясь к веб-серверу.
+
+* Реализация
+
+В реализации используются:
+- Фреймворк Flask
+- Движок шаблонов Jinja2
+- ORM SQLAlchemy
+- База данных SQLite
+
+** Исходный код сервера
+
+\src{python}{../src/web.py}
+\src{python}{../src/rss/rss.py}
+\src{python}{../src/rss/parse.py}
+
+** Шаблоны и стили
+\src{html+jinja}{../web/templates/main.html}
+\src{html+jinja}{../web/templates/feed.html}
+
+* Выводы
+В ходе выполнения данной лабораторной работы было изучено создание
+веб-приложений с применением фреймворка Flask, а также работа с базами
+данных в Python с помощью SQLAlchemy и SQLite.
