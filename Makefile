@@ -1,8 +1,22 @@
 PY = python3
 APP = src/web.py
 
-all: data
-	$(PY) $(APP)
+VENV = venv
+VENV_ACTIVATE = . $(VENV)/bin/activate
+VENV_DEACTIVATE = deactivate
+
+REQUIREMENTS = requirements.txt
+
+TEMP_FILES = data
+
+all: $(VENV) data
+	$(VENV_ACTIVATE) && \
+	$(PY) $(APP) && \
+	$(VENV_DEACTIVATE)
+
+$(VENV):
+	$(PY) -m venv $(VENV)
+	$(VENV_ACTIVATE) && pip3 install -r $(REQUIREMENTS)
 
 debug: data
 	FLASK_DEBUG=1 FLASK_APP=$(WEBAPP_DEV) flask run
@@ -13,4 +27,7 @@ dev: data
 data:
 	mkdir -p data
 
-.PHONY: report
+clean:
+	rm -r $(TEMP_FILES)
+
+.PHONY: clean debug
