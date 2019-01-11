@@ -19,7 +19,11 @@ def create_app(sqlite_file='./feed.sqlite3'):
     # Configure SQLite
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///{}/data/{}'.format(getcwd(), sqlite_file)
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False # Do not emit signals on object changes
-    db = SQLAlchemy(app)
+
+    db = SQLAlchemy(app, session_options={
+        'expire_on_commit': False # No need for expiration since SQLite instance
+                                  # has only 1 client
+        })
 
     # Pass SQLAlchemy instance to RSS Schema
     import rss.config
@@ -37,16 +41,6 @@ def create_app(sqlite_file='./feed.sqlite3'):
             'channels': None,    # List of the feed's channels
             'posts': None        # Posts for current page
             }
-
-    # # Feed-specific context. Cleared when another feed is selected.
-    feed_context = {
-    #         'feed_channels': [], # (name, url)
-    #         'feed_items': [],
-            }
-
-    # Page-specific context. Cleared for new visit.
-    # Specified inside method handler
-    # context = {}
 
     def init():
         print(' * Initialization of RSS web-server')
@@ -94,8 +88,6 @@ def create_app(sqlite_file='./feed.sqlite3'):
         clear_feed_context()
         return render_template('main.html', 
                 **context,
-                # **feed_context,
-                # **context
                 )
 
     @app.route('/update')
@@ -139,8 +131,6 @@ def create_app(sqlite_file='./feed.sqlite3'):
 
         return render_template('feed.html', 
                 **context,
-                # **feed_context,
-                # **context
                 )
 
     @app.route('/feed/<string:feed_title>/add_channel', methods=('POST',))
@@ -154,7 +144,7 @@ def create_app(sqlite_file='./feed.sqlite3'):
         feed.add_channel(url)
         context['page'] = None
 
-        debug_print('Added channel {}'.format(feed_title))
+        debug_print('Added channel {}'.format(url))
 
         return redirect('/feed/{}'.format(feed_title))
 

@@ -14,14 +14,24 @@ Web-based RSS reader that was made during Python courses in ITMO University.
 * How to launch
 
 ** Launch web-server
-#BEGIN_SRC shell
-# make
-#END_SRC
+#+BEGIN_SRC sh
+make
+#+END_SRC
 
 ** Open web-client in any modern browser
 The URL for client is ~localhost:5000~
 
 
+
+* Screenshots
+
+#+ATTR_HTML: title="new"
+[[file:figure/new.png]]
+
+#+ATTR_HTML: title="feed"
+[[file:figure/feed.png]]
+
+
 * Bugs:
-- After reload of web-server, feeds lose all their assosiations with channels.  
+- After reload of web-server, feeds lose all their assosiations with channels.
   Probably DB bug.

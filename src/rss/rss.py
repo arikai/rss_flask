@@ -23,20 +23,20 @@ def obj_state(obj):
     return 'unknown state'
 
 # Secondary table for many-to-many relationship
-# feed_channels = db.Table('FeedChannels',
-#         db.Column(feed_title',    db.Unicode(80), db.ForeignKey('RSSFeed.title'), primary_key=True),
-#         db.Column('channel_url', db.Unicode(511), db.ForeignKey('RSSChannel.url'), primary_key=True)
-#         )
+feed_channels = db.Table('FeedChannels',
+        db.Column('feed_title',    db.Unicode(80), db.ForeignKey('RSSFeed.title'), primary_key=True),
+        db.Column('channel_url', db.Unicode(511), db.ForeignKey('RSSChannel.url'), primary_key=True)
+        )
 
 class RSSFeed(db.Model):
     __tablename__ = 'RSSFeed'
 
     title = db.Column(db.Unicode(80), primary_key=True)
 
-    channels = db.relationship('RSSChannel', lazy='joined')
+    # channels = db.relationship('RSSChannel', lazy='joined')
     # For some reason, many-to-many doesn't work
-    # channels = db.relationship('RSSChannel', secondary=feed_channels,
-    #         lazy='joined')
+    channels = db.relationship('RSSChannel', secondary=feed_channels,
+            lazy='joined')
             # lazy='subquery')
 
     @classmethod

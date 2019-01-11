@@ -16,10 +16,10 @@
     </form>
 </div>
 
-{% if feed_channels %}
+{% if feed.channels %}
 <div class="card" id="channels">
-    {% for name, link in feed_channels %}
-    <nav class="channel"><a href="{{link}}">{{ name }}</a></nav>
+    {% for c in feed.channels %}
+    <nav class="channel"><a href="{{ c.link }}">{{ c.title }}</a></nav>
     {% endfor %}
 </div>
 {% endif %}
