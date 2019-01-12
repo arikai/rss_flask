@@ -1,5 +1,6 @@
 from flask import Flask
 from flask import abort, redirect, url_for, render_template, request
+from flask_less import lessc as flask_less
 
 from flask_sqlalchemy import SQLAlchemy
 
@@ -15,6 +16,9 @@ def create_app(sqlite_file='./feed.sqlite3'):
             static_folder='../web/static/',
             template_folder='../web/templates/'
             )
+
+    # Enable Flask Less
+    flask_less(app, minify=False, spaces=False)
 
     # Configure SQLite
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///{}/data/{}'.format(getcwd(), sqlite_file)
